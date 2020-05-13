@@ -22,13 +22,6 @@ connection.query('SELECT * from node', function (err, rows, fields)
 });
 
 
-app.get('/', (req, res) => {
-  connection.query('SELECT * from node', function (err, rows, fields)
-  {
-      if (err) throw errconsole.log('the data are as follows', rows)
-      res.send(rows);
-  })
-  });
 
 connection.connect(function(err) {
 
