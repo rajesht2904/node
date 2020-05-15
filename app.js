@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
 connection.connect()
 
 
-app.get('/', (req, res) => {
+app.get('/select', (req, res) => {
 connection.query('SELECT * from node', function (err, rows, fields)
 {
     if (err) throw errconsole.log('the data are as follows', rows)
@@ -21,25 +21,28 @@ connection.query('SELECT * from node', function (err, rows, fields)
 })
 });
 
-
-
-connection.connect(function(err) {
+app.post('/insert', (req, res) =>  {
 
   var sql = "INSERT INTO node (name, age) VALUES ('rajesh', '21'), ('rajesh1', '22')";
-  connection.query(sql, function (err, fields) {
+  connection.query(sql, function (err,rows, fields) {
     if (err) throw err;
     console.log("2 record inserted");
+    res.send(rows);
   });
 });
-connection.connect(function(err) {
+
+
+app.delete('/delete', (req, res) =>  {
  
-  var sql = "DELETE FROM node WHERE name = 'rajesh'";
+  var sql = "DELETE FROM node WHERE name = 'dawdad'";
   connection.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Number of records deleted: " + result.affectedRows);
   });
 });
-connection.connect(function(err) {
+
+
+app.put('/update', (req, res) =>  {
 
   var sql = "UPDATE node SET name = 'rajesh2' WHERE name = 'rajesh1'";
   connection.query(sql, function (err, result) {
